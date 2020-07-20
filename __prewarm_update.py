@@ -15,8 +15,6 @@ importlib.reload(sys)
 #sys.setdefaultencoding('utf-8')
 
 file_context = open("file.txt").read().splitlines()
-#file_context = ["http://d2r0qln3p9n9mv.cloudfront.net/example-1.png"]
-#domain = "l13-prod-patch-ua3.komoejoy.com"
 domain = "xxxxx.example.com"  # 您的实际的自定义域名, 如果您有CNAME,则填写您的实际CNAME(xxx.example.com)，如无，则domain是xxx.cloudfront.net
 #http_domain = "https://xxx.xxx.com"
 cdn_name = 'xxxx.cloudfront.net'
