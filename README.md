@@ -10,9 +10,9 @@ CDN 已经为一项成熟且广泛应用的技术，其原理为 CDN POP 节点�
 
 ## 免责声明
 
-建议测试过程中使用此方案，生产环境使用请自行考虑评估。
-当您对方案需要进一步的沟通和反馈后，可以联系 nwcd_labs@nwcdcloud.cn 获得更进一步的支持。
-欢迎联系参与方案共建和提交方案需求, 也欢迎在 github 项目 issue 中留言反馈 bugs。
+建议测试过程中使用此方案，生产环境使用请自行考虑评估。    
+当您对方案需要进一步的沟通和反馈后，可以联系 nwcd_labs@nwcdcloud.cn 获得更进一步的支持。     
+欢迎联系参与方案共建和提交方案需求, 也欢迎在 github 项目 issue 中留言反馈 bugs。     
 
 ## 前提条件        
 1. 请先保证您的 CloudFront 配置正确，如源，权限等，确保 CloudFront 首先能够正常的对外提供 web 服务的加载。
@@ -54,7 +54,7 @@ AWS 官方虽然没有对应的页面列出所有的 PoP 点的 code，但从一
    ```
 
 **3. 参数定义**     
-修改以下参数为您自己的参数。
+在 ``__prewarm_update.py`` 中修改以下参数为您自己的参数。
 ```
 # 您的实际的自定义域名。如果您有CNAME,则填写您的实际CNAME(xxx.example.com)，如无，则domain是xxx.cloudfront.net
 # 另外，中国区的Cloudfront，只能填写备案过的CNAME名称，否则无法正常创建distribution
