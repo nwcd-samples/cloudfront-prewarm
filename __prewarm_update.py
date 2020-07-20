@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import http.client
 import csv
 import importlib
+import os
 
 importlib.reload(sys)
 
@@ -16,9 +17,9 @@ importlib.reload(sys)
 file_context = open("file.txt").read().splitlines()
 #file_context = ["http://d2r0qln3p9n9mv.cloudfront.net/example-1.png"]
 #domain = "l13-prod-patch-ua3.komoejoy.com"
-domain = "example.com"  # 您的实际的自定义域名
-#http_domain = "https://l13.xxx.com"
-cdn_name = 'd1s4q8j0xxxxx.cloudfront.net'
+domain = "xxxxx.example.com"  # 您的实际的自定义域名, 如果您有CNAME,则填写您的实际CNAME(xxx.example.com)，如无，则domain是xxx.cloudfront.net
+#http_domain = "https://xxx.xxx.com"
+cdn_name = 'xxxx.cloudfront.net'
 cur_pops = "pops.csv"
 result_file = "result.csv"
 no_ip_file = "no_ip_file.csv"
@@ -43,15 +44,31 @@ def CdnWarm(ip, url, dn, pop):
                               # 模拟浏览器
                               "Referer": "im is test"})  # 请求来源
         response = conn.getresponse()  # 获取CDN的回应内容信息
+        data1=response.read()
+        f1=open("test.jpg", "wb")
+        f1.write(data1)
+        f1.close()
         headers = response.getheaders()
+
         #print(response.status)  # 输出http状态码
         conn.close()  # 链接关闭
+
+        if os.path.exists("test.jpg"):
+            os.remove("test.jpg")
+        else:
+            print("The file does not exist")
+
+
         if cache_index == 0:
             while str(headers[cache_index]).find("from cloudfront") < 0:
                 cache_index = cache_index + 1
+
         result = [pop, cdn_name % (pop), url, response.status, response.getheaders()[cache_index]]
         saveStringToCsv(result, result_file)
         print(result)
+        if (response.getheaders()[cache_index]) == 'Miss from cloudfront':
+            CdnWarm(ip, url, dn, pop)
+
     except BaseException as e:
         print(" ====================================")
         print("||      " + ip + "   error       ||")

@@ -1,0 +1,4 @@
+/lena.jpg
+/random.jpg
+/image.jpg
+/simple.csv
